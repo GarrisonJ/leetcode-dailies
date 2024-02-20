@@ -7,3 +7,6 @@ def missing_number(nums)
     end
     sorted.index(false)
 end
+
+# Or using guass's formula for O(1) space
+def missing_number(nums) = (nums.size*(nums.size+1))/2 - nums.sum
