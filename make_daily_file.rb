@@ -28,7 +28,7 @@ if result && result["data"] && result["data"]["activeDailyCodingChallengeQuestio
   daily_question = result["data"]["activeDailyCodingChallengeQuestion"]["question"]["title"]
   id = result["data"]["activeDailyCodingChallengeQuestion"]["question"]["frontendQuestionId"]
 
-  current_date = Date.today.strftime('%d-%m-%Y')
+  current_date = Date.today.strftime('%Y-%m-%d')
 
   filename = "#{current_date} #{id}. #{daily_question}.rb"
 
