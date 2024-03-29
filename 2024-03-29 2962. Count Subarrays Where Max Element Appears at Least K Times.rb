@@ -5,18 +5,18 @@ def count_subarrays(nums, k)
     max = nums.max
     count = 0
 
-    counter = Hash.new(0)
-    left = 0 
+    counter = 0
+    left = 0
     right = 0
-    counter[nums[0]]+=1
-    count += 1 if nums[0] == max && 1 == k
+    counter+=1 if nums[0] == max
+    count += 1 if counter == k
 
     while right < nums.size-1 do
         right+=1
-        counter[nums[right]]+=1
+        counter+=1 if nums[right] == max
 
-        while counter[max] >= k do
-            counter[nums[left]] -= 1
+        while counter >= k do
+            counter -= 1 if nums[left] == max
             left+=1
         end
         count+=left
