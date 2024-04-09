@@ -18,3 +18,18 @@ def time_required_to_buy(tickets, k)
     end
     throw "Something has gone seriously wrong"
 end
+
+# @param {Integer[]} tickets
+# @param {Integer} k
+# @return {Integer}
+def time_required_to_buy(tickets, k)
+    seconds = 0
+    tickets.each_with_index do |person, i|
+        if i <= k
+            seconds += [person, tickets[k]].min
+        else
+            seconds += [person, tickets[k]-1].min
+        end
+    end
+    seconds
+end
