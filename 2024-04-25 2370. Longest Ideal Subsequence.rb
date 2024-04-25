@@ -14,3 +14,17 @@ def longest_ideal_string(s, k)
     end
     dp.max
 end
+
+# @param {String} s
+# @param {Integer} k
+# @return {Integer}
+def longest_ideal_string(s, k)
+    dp = [0]*26
+    (0..s.size-1).each do |i|
+        curr = s[i].ord - 'a'.ord
+        lower_bound = [0, curr-k].max
+        upper_bound = [curr+k, 26].min
+        dp[curr] = dp[[0, curr-k].max..[curr+k, 26].min].max + 1
+    end
+    dp.max
+end
