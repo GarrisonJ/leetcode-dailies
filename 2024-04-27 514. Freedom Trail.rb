@@ -32,3 +32,36 @@ def try_lock(ring_index, key_index)
         min_steps
     end
 end
+
+
+# @param {String} ring
+# @param {String} key
+# @return {Integer}
+def find_rotate_steps(ring, key)
+    mod = ring.size
+    queue = [[0, 0, 0]] # Location, key_location, steps
+    seen = Set.new([[0,0]])
+    while !queue.empty? do
+        location, key_location, steps = queue.shift
+        if ring[location] == key[key_location]
+            key_location+=1
+            return steps+1 if key_location == key.size
+            if !seen.include?([location, key_location])
+                queue << [location, key_location, steps+1]
+                seen << [location, key_location]
+            end
+        else
+            if !seen.include?([(location+1) % mod, key_location])
+                queue << [(location+1) % mod, key_location, steps+1]
+                seen << [(location+1) % mod, key_location]
+            end
+            back_location = (location-1) % mod
+            back_location = ring.size + back_location if back_location.negative?
+            if !seen.include?([back_location, key_location])
+                queue << [back_location, key_location, steps+1]
+                seen << [back_location, key_location]
+            end
+        end
+    end
+    raise "Invalid input"
+end
